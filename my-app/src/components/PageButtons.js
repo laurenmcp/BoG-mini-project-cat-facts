@@ -10,8 +10,8 @@ function PageButtons(props) {
     
     return (
         <div className="historyNavButtons">
-            <button className="navButton buttonText" onClick={() => setIndex((index - 1 >= min)? index - 1 : min)}><h2>back</h2></button>
-            <button className="navButton buttonText" onClick={() => setIndex((index + 1 <= max) ? index + 1 : max)}><h2>next</h2></button>
+            <button className="navButton buttonText" onClick={() => setIndex((index - 1 >= min)? index - 1 : min)}><h1>back</h1></button>
+            <button className="navButton buttonText" onClick={() => setIndex((index + 1 <= max) ? index + 1 : max)}><h1>next</h1></button>
         </div>
     )
 }

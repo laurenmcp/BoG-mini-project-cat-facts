@@ -1,16 +1,21 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import CatFactList from './components/CatFactList';
+import CatFact from './components/CatFact';
 import PageButtons from './components/PageButtons';
 import FeaturedFact from './components/FeaturedFact';
+import cat2 from "./images/cat2.jpg"
 
 function App() {
-  const [ catFact, setCatFact ] = useState({})
+  
+  //Use state on number of facts, current catFact, catFact array, current page index, and render array
   const [ numFacts, setNumFacts ] = useState(0)
+  const [ catFact, setCatFact ] = useState({})
   const [ catFactArray, setCatFactArray ] = useState([])
-  const [ likedArray, setLikedArray ] = useState ([])
   const [ currentPageIndex, setCurrentPageIndex ] = useState(1);
+  const [ renderArr, setRenderArr ] = useState([]);
 
+
+  //Push current cat fact to catFactArray and fetch a new one when the numFacts increases on click of "get new fact" button
   useEffect(() => {
     var temp = catFactArray;
     temp.push(catFact);
@@ -25,34 +30,40 @@ function App() {
       setCatFact(f)});
   }, [numFacts])
 
+  //Rerender the history to show 10 facts depending on the pageIndex
+  var min;
+  var max;
   useEffect(() => {
-    console.log("LIKED CHANGED")
-    console.log(likedArray)
-    var temp = catFactArray.map((e) => e)
-    
-    setCatFactArray(temp)
-    }, [likedArray])
+    var temp = catFactArray;
+    min = 2 + ((currentPageIndex - 1) * 10);
+    max = 12 + ((currentPageIndex - 1) * 10);
+    var show = temp.slice(min, max);
+    show = show.reverse();
+    setRenderArr(show);
+    console.log(renderArr)
+  }, [currentPageIndex, catFactArray, numFacts])
+  
+  //Increment the current page index if the history page is full to ensure the most recent 10 facts appear by default
+  useEffect(() => {
+    if (numFacts > 1 && (numFacts - 1) % 10 == 0) {
+      setCurrentPageIndex(currentPageIndex + 1);
+    }
+  }, [numFacts])
 
-
-  console.log("FACT ARRAY")
-  console.log(catFactArray)
-
-
-  console.log("NUMFACTS")
-  console.log(numFacts)
-
-  // console.log(document.getElementsByClassName("div"))
-
+  //Return a header, get button, FeaturedFact, map of currently displayed CatFacts, and PageButton
   return (
     <div className="CatFactApp">
-
-      <h1>CAT FACTS</h1>
-      <button className="getButton buttonText" onClick={() => setNumFacts(numFacts + 1)}><h2>GET NEW FACT</h2></button>
-      <FeaturedFact data={catFact} num={numFacts}></FeaturedFact>
-      <h1>HISTORY</h1>
+      <button className="getButton buttonText" onClick={() => setNumFacts(numFacts + 1)}><img src={cat2}></img><h1>GET A COOL CAT FACT</h1></button>
+      <FeaturedFact data={catFact} num={numFacts} catFact={catFact} setCatFact={setCatFact}></FeaturedFact>
+      <div id="spacer"><h2>history</h2></div>
+      <div>
+      {renderArr.map((e) => {
+                console.log("HISTORY RERENDER")
+                let k = renderArr.indexOf(e)
+                return <CatFact data={e} key={k} catFactArray={catFactArray} setCatFactArray={setCatFactArray}></CatFact>;
+            })}
+      </div>
       <PageButtons index={currentPageIndex} setIndex={setCurrentPageIndex} num={numFacts}></PageButtons>
-      <CatFactList data={catFactArray} num={numFacts} page={currentPageIndex} 
-        liked={likedArray} setLiked={setLikedArray}></CatFactList>
     </div>
   );
 }

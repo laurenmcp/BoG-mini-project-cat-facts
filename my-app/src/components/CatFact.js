@@ -1,34 +1,28 @@
 
-
 export default function CatFact(props) {
     //Destructure data from the props
 
-    const { data, num, liked, setLiked} = props;
+    const { data, catFactArray, setCatFactArray } = props;
 
-    var bgColor = (data.liked) ? "red" : "yellow"
-
-    console.log("CAT FACT PROPS")
-    console.log(props)
-
+    const customBlue = `rgba(24, 119, 140, 55)`;
+    const customPink = `rgba(166, 107, 86, 65)`;
+    var bgColor = (data.liked) ? customPink : customBlue;
 
     function toggle() {
-        let temp = liked;
-        console.log("TESTING")
-        console.log(temp);
-        console.log(liked);
-        if(temp.includes(data)) {
-            temp.pop(data)
-        } else {
-            temp.push(data)
+        let temp = [
+            ...catFactArray
+        ]
+        let idx = temp.indexOf(data)
+        temp[idx] = {
+            fact: data.fact,
+            liked: !data.liked
         }
-        setLiked(temp)
-        console.log(liked);
-    }
+        setCatFactArray(temp)
+      }
 
     return (
-            <div onClick={() => toggle} style={{background: bgColor}} className="catFact"> 
+            <div onClick={toggle} style={{background: bgColor}} className="catFact"> 
                 <p>{data.fact}</p>
             </div>
-
     )
 }

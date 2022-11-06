@@ -2,31 +2,42 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #D4D9CC;
+  background-color: rgb(19, 51, 64, 55);
 }
 
+img {
+  max-height: 30em;
+  margin: 0em;
+  margin-top: 2em;
+}
 h1 {
-  font-size: 64px;
+  font-size: 70px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-weight: 300;
+  font-weight: 400;
+  color: #A64E55;
+  font-style: oblique;
 }
 
 h2 {
-  font-size: 36px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-weight: 300;
+    font-size: 30px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 400;
+    color: #D7D7D9;
+    font-style: oblique;
 }
-
 h3 {
-  font-size: 36px;
+  font-size: 30px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: 300;
+  color: #D7D7D9;
+
 }
 
 p {
   font-size: 18px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: 300;
+  color: #D7D7D9;
 }
 
 .historyNavButtons {
@@ -34,10 +45,12 @@ p {
   flex-direction: row;
   align-items: center;
   column-gap: 2em;
+  margin: 2em;
 }
 
 .navButton {
-  width: 15em;
+  width: 20em;
+  height: 6em;
 }
 
 .buttonText {
@@ -48,14 +61,14 @@ p {
 }
 
 .getButton {
-  width: 30em;
-
+  width: 70em;
+  margin: 2em;
 }
 
 /*CAT FACT BOXES*/
 .catFact {
   padding: 2em;
-  width: 50em;
+  width: 56em;
   border-radius: 10px;
   background-color: #F2F2F2;
   margin: 2em;
@@ -64,22 +77,22 @@ p {
   row-gap: 2em;
 }
 
-.liked {
-  background-color: red;
-}
-
-.unliked {
-  background-color: white;
-}
-
 .feature {
   max-height: 400em;
-  background-color: #A68C6D;
 }
 
 button {
-  background-color: white;
+  background-color: #A2A2A3;
   border-radius: 10px;
 }
 
-/*#A65353*/
+#spacer {
+  background-color: #A64E55;
+  height: 3em;
+  width: 60em;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
