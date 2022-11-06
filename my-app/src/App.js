@@ -3,13 +3,12 @@ import { useEffect, useState } from 'react';
 import CatFactList from './components/CatFactList';
 import PageButtons from './components/PageButtons';
 import FeaturedFact from './components/FeaturedFact';
-import GetFactButton from './components/GetFactButton';
 
 function App() {
   const [ catFact, setCatFact ] = useState({})
   const [ numFacts, setNumFacts ] = useState(0)
   const [ catFactArray, setCatFactArray ] = useState([])
-  // const [ likedArray, setLikedArray ] = useState ([])
+  const [ likedArray, setLikedArray ] = useState ([])
   const [ currentPageIndex, setCurrentPageIndex ] = useState(1);
 
   useEffect(() => {
@@ -27,12 +26,17 @@ function App() {
   }, [numFacts])
 
   useEffect(() => {
-    console.log("PAGE")
-    console.log(currentPageIndex)
-  }, [currentPageIndex])
+    console.log("LIKED CHANGED")
+    console.log(likedArray)
+    var temp = catFactArray.map((e) => e)
+    
+    setCatFactArray(temp)
+    }, [likedArray])
+
 
   console.log("FACT ARRAY")
   console.log(catFactArray)
+
 
   console.log("NUMFACTS")
   console.log(numFacts)
@@ -47,7 +51,8 @@ function App() {
       <FeaturedFact data={catFact} num={numFacts}></FeaturedFact>
       <h1>HISTORY</h1>
       <PageButtons index={currentPageIndex} setIndex={setCurrentPageIndex} num={numFacts}></PageButtons>
-      <CatFactList data={catFactArray} setLiked={setCatFactArray} num={numFacts} page={currentPageIndex}></CatFactList>
+      <CatFactList data={catFactArray} num={numFacts} page={currentPageIndex} 
+        liked={likedArray} setLiked={setLikedArray}></CatFactList>
     </div>
   );
 }
